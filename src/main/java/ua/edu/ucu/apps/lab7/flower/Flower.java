@@ -10,8 +10,7 @@ import lombok.Setter;
 @Setter
 
 
-
-public final class Flower {
+public class Flower implements Item {
     @Getter @Setter
     private double sepalLength;
     @Setter
@@ -34,5 +33,10 @@ public final class Flower {
 
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Flower: " + flowerType + ", Color: " + getColor() + ", Price: " + price;
     }
 }

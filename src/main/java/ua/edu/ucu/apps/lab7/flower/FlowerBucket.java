@@ -2,7 +2,8 @@ package ua.edu.ucu.apps.lab7.flower;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlowerBucket {
+public class FlowerBucket implements Item {
+
 
     private List<FlowerPack> flowerPacks = new ArrayList<>();
     
@@ -18,5 +19,11 @@ public double getPrice() {
         totalPrice += pack.getPrice();
     }
     return totalPrice;
-}
+    }
+
+    @Override
+    public String getDescription() {
+        return "FlowerBucket with " + flowerPacks.size() + " packs, total price: " + getPrice();
+    }
+
 }
