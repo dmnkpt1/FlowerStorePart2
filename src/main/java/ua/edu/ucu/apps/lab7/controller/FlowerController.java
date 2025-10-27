@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ua.edu.ucu.apps.lab7.delivery.Delivery;
-// import ua.edu.ucu.apps.lab7.Payment.CreditCardPaymentStrategy;
-// import ua.edu.ucu.apps.lab7.Payment.PayPalPaymentStrategy;
-// import ua.edu.ucu.apps.lab7.Payment.Payment;
+import ua.edu.ucu.apps.lab7.Payment.CreditCardPaymentStrategy;
+import ua.edu.ucu.apps.lab7.Payment.PayPalPaymentStrategy;
+import ua.edu.ucu.apps.lab7.Payment.Payment;
 import ua.edu.ucu.apps.lab7.delivery.DHLDeliveryStrategy;
 import ua.edu.ucu.apps.lab7.delivery.PostDeliveryStrategy;
 import ua.edu.ucu.apps.lab7.flower.Flower;
@@ -46,6 +46,28 @@ public class FlowerController {
             return "Post delivery to: " + address;
         } else {
             return "Post delivery failed";
+        }
+    }
+
+    @GetMapping("/payment/credit-card")
+    public String payWithCreditCard(@RequestParam double amount) {
+        Payment payment = new CreditCardPaymentStrategy();
+        boolean success = payment.pay(amount);
+        if (success) {
+            return "Credit card payment successful: " + amount;
+        } else {
+            return "Credit card payment failed";
+        }
+    }
+    
+    @GetMapping("/payment/paypal")
+    public String payWithPayPal(@RequestParam double amount) {
+        Payment payment = new PayPalPaymentStrategy();
+        boolean success = payment.pay(amount);
+        if (success) {
+            return "PayPal payment successful: " + amount;
+        } else {
+            return "PayPal payment failed";
         }
     }
 }
